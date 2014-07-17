@@ -86,7 +86,7 @@ hist(df0.raw$steps,
      main = "Histogram: Total number of steps taken each day")
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+![plot of chunk histogram](figure/histogram.png) 
 
 ```r
 #?hist
@@ -141,7 +141,7 @@ with(df2.steps.interval, plot(x = interval, y = mean.steps,
      main = "Time series plot: Average daily activity pattern"))
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6.png) 
+![plot of chunk time series plot](figure/time series plot.png) 
 
 
 #### Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
@@ -201,7 +201,7 @@ hist(df3.replace$steps.replace,
      main = "Histogram: Total number of steps taken each day (Imputed Missing Values)")
 ```
 
-![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10.png) 
+![plot of chunk histogram after imputing missing values](figure/histogram after imputing missing values.png) 
 
 ```r
 #?hist
@@ -293,4 +293,4 @@ with(df2.steps.interval[df3.replace$day.type == "weekend", ], plot(x = interval,
      main = "Panel Plot Part B: Average daily activity pattern - Weekend"))
 ```
 
-![plot of chunk unnamed-chunk-14](figure/unnamed-chunk-14.png) 
+![plot of chunk panel plot](figure/panel plot.png) 
