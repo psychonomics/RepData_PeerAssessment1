@@ -83,7 +83,7 @@ summary(df0.raw)
 ```r
 hist(df0.raw$steps, 
      xlab = "Total number of steps taken each day",
-     main = "Total number of steps taken each day")
+     main = "Histogram: Total number of steps taken each day")
 ```
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
@@ -138,7 +138,7 @@ with(df2.steps.interval, plot(x = interval, y = mean.steps,
      type = "l",
      xlab = "5-minute interval",
      ylab = "Number of steps",
-     main = "Average daily activity pattern"))
+     main = "Time series plot: Average daily activity pattern"))
 ```
 
 ![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6.png) 
@@ -161,6 +161,7 @@ df2.steps.interval[which.max(df2.steps.interval[ , 2]), ]
 ## Imputing missing values
 
 #### Note that there are a number of days/intervals where there are missing values (coded as NA). The presence of missing days may introduce bias into some calculations or summaries of the data.
+
 #### Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 
 
@@ -174,6 +175,9 @@ nrow(df0.raw[!complete.cases(df0.raw), ])
 ```
 
 #### Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
+
+The strategy I am using for filling in all of the missing values in the dataset is to replace the missing values with the average number of steps for that 5-minute interval, averaged accross all days (with non-missing values).
+
 #### Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
 
@@ -194,7 +198,7 @@ df3.replace$steps.replace <- ifelse(is.na(df3.replace$steps), df3.replace$mean.s
 ```r
 hist(df3.replace$steps.replace, 
      xlab = "Total number of steps taken each day",
-     main = "Total number of steps taken each day")
+     main = "Histogram: Total number of steps taken each day (Imputed Missing Values)")
 ```
 
 ![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10.png) 
@@ -267,19 +271,26 @@ df3.replace$day.type <- as.factor(ifelse(df3.replace$day %in% c("Saturday", "Sun
 
 ```r
 par(mfrow = c(2, 1))
+?layout
+```
 
+```
+## starting httpd help server ... done
+```
+
+```r
 with(df2.steps.interval[df3.replace$day.type == "weekday", ], plot(x = interval, y = mean.steps, 
      type = "l",
      xlab = "5-minute interval",
      ylab = "Number of steps",
-     main = "Average daily activity pattern - weekday"),
+     main = "Panel Plot Part A: Average daily activity pattern - Weekday"),
      )
 
 with(df2.steps.interval[df3.replace$day.type == "weekend", ], plot(x = interval, y = mean.steps, 
      type = "l",
      xlab = "5-minute interval",
      ylab = "Number of steps",
-     main = "Average daily activity pattern - weekend"))
+     main = "Panel Plot Part B: Average daily activity pattern - Weekend"))
 ```
 
 ![plot of chunk unnamed-chunk-14](figure/unnamed-chunk-14.png) 
